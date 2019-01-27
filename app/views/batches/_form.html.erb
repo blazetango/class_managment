@@ -1,0 +1,37 @@
+<%= form_with(model: batch, local: true) do |form| %>
+  <% if batch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(batch.errors.count, "error") %> prohibited this batch from being saved:</h2>
+
+      <ul>
+      <% batch.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :batch_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.number_field :duration, id: :batch_duration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :day %>
+    <%= form.select :day, [['Sunday', 'sunday'], ['Monday', 'monday'],[ 'Tuesday', 'tuesday'], ['Wednesday', 'wednesday'], ['Thursday', 'thursday'] , ['Friday', 'friday'], ['Saturday', 'saturday']],  id: :batch_day %>
+  </div>
+
+  <div class="field">
+    <%= form.label :timing %>
+    <%= form.time_select :timing, id: :batch_timing %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

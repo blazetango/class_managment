@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @batch.name %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @batch.duration %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @batch.day %>
+</p>
+
+<p>
+  <strong>Timing:</strong>
+  <%= @batch.timing %>
+</p>
+
+<%= link_to 'Edit', edit_batch_path(@batch) %> |
+<%= link_to 'Back', batches_path %>
