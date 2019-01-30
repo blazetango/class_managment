@@ -34,6 +34,7 @@ class StudentsController < ApplicationController
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
+         @batches = Batch.all
         format.html { render :new }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end

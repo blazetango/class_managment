@@ -17,8 +17,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :duration %>
-    <%= form.number_field :duration, id: :batch_duration %>
+    <%= form.label :capcity %>
+    <%= form.number_field :capacity, id: :batch_capcity %>
+  </div>
+
+    <div class="field">
+    <%= form.label :instrument %>
+    <%= form.select :instrument_id, options_for_select(@instruments.collect{ |u| [u.name, u.id] }) ,  id: :instrument_id %>
   </div>
 
   <div class="field">

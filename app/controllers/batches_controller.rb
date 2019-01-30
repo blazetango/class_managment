@@ -16,10 +16,12 @@ class BatchesController < ApplicationController
   # GET /batches/new
   def new
     @batch = Batch.new
+    @instruments = Instrument.all
   end
 
   # GET /batches/1/edit
   def edit
+    @instruments = Instrument.all
   end
 
   # POST /batches
@@ -70,6 +72,6 @@ class BatchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def batch_params
-      params.require(:batch).permit(:name, :duration, :day, :timing)
+      params.require(:batch).permit(:name, :capacity, :day, :timing, :instrument_id)
     end
 end
