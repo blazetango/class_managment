@@ -6,8 +6,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
-      <li><%= link_to 'Students', students_path %> </li>
-      <li><%= link_to "Batches", batches_path %></li>
+        <li><%= link_to 'Students', students_path %></li>
+        <li><%= link_to "Batches", batches_path %></li>
+        <li><%= link_to "fees", fees_path %></li>
+        <li><%= link_to "instru", instruments_path %></li>
 
         <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
       <% else %>
