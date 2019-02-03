@@ -16,6 +16,15 @@
     <%= form.text_field :amount, id: :fee_amount %>
   </div>
 
+  <div class="field">
+    <%= form.label :month_id %>
+    <%= form.select :month_id, options_for_select(@months.collect{ |u| [u.name, u.id] }), id: :fee_month_id %>
+  </div>
+
+    <div class="field">
+    <%= form.label :center_id %>
+    <%= form.select :center_id, options_for_select(@centers.collect{ |u| [u.name, u.id] }), id: :efee_center_id %>
+  </div>
 
   <div class="field">
     <%= form.label :student %>

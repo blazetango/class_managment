@@ -21,9 +21,19 @@
     <%= form.number_field :capacity, id: :batch_capcity %>
   </div>
 
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.select :duration, [[30, 30], [60 ,60]],  id: :batch_duration %>
+  </div>
+
     <div class="field">
     <%= form.label :instrument %>
     <%= form.select :instrument_id, options_for_select(@instruments.collect{ |u| [u.name, u.id] }) ,  id: :instrument_id %>
+  </div>
+
+   <div class="field">
+    <%= form.label :cetner %>
+    <%= form.select :center_id, options_for_select(@centers.collect{ |u| [u.name, u.id] }) ,  id: :center_id %>
   </div>
 
   <div class="field">

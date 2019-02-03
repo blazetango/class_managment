@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>duration:</strong>
+  <%= @batch.duration %>
+</p>
+
+<p>
   <strong>Day:</strong>
   <%= @batch.day %>
 </p>
@@ -26,3 +31,32 @@
 
 <%= link_to 'Edit', edit_batch_path(@batch) %> |
 <%= link_to 'Back', batches_path %>
+
+
+<h3>Students in this batch</h3>
+
+<table data-toggle="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mobile</th>
+      <th>batch name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.mobile %></td>
+        <td><%= student.batch.name %></td>
+        <td><%= link_to 'Show', student %></td>
+        <td><%= link_to 'Edit', edit_student_path(student) %></td>
+        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

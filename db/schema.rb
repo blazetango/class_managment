@@ -10,23 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190127120359) do
+ActiveRecord::Schema.define(version: 20190202182350) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "batches", force: :cascade do |t|
     t.string "name"
-    t.integer "duration"
+    t.integer "capacity"
     t.string "day"
     t.time "timing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "instrument_id"
+    t.integer "duration"
+    t.integer "center_id"
+  end
+
+  create_table "centers", force: :cascade do |t|
+    t.string "address"
+    t.string "name"
+    t.float "budget"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.float "amount"
+    t.string "name"
+    t.bigint "month_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["month_id"], name: "index_expenses_on_month_id"
   end
 
   create_table "fees", force: :cascade do |t|
     t.float "amount"
-    t.integer "student_id"
+    t.bigint "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "center_id"
+    t.bigint "month_id"
+    t.index ["center_id"], name: "index_fees_on_center_id"
+    t.index ["month_id"], name: "index_fees_on_month_id"
     t.index ["student_id"], name: "index_fees_on_student_id"
+  end
+
+  create_table "instruments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "months", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -34,8 +73,17 @@ ActiveRecord::Schema.define(version: 20190127120359) do
     t.string "mobile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "batch_id"
+    t.bigint "batch_id"
     t.index ["batch_id"], name: "index_students_on_batch_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.string "name"
+    t.string "transactable_type"
+    t.bigint "transactable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transactable_type", "transactable_id"], name: "index_transactions_on_transactable_type_and_transactable_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,4 +104,9 @@ ActiveRecord::Schema.define(version: 20190127120359) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "expenses", "months"
+  add_foreign_key "fees", "centers"
+  add_foreign_key "fees", "months"
+  add_foreign_key "fees", "students"
+  add_foreign_key "students", "batches"
 end

@@ -16,6 +16,8 @@ class FeesController < ApplicationController
   def new
     @fee = Fee.new
     @students = Student.all
+    @months = Month.all
+    @centers = Center.all
   end
 
   # GET /fees/1/edit
@@ -26,9 +28,9 @@ class FeesController < ApplicationController
   # POST /fees.json
   def create
     @fee = Fee.new(fee_params)
-
     respond_to do |format|
       if @fee.save
+        Transaction.create(transactable: @fee, name: "student fees")
         format.html { redirect_to @fee, notice: 'Fee was successfully created.' }
         format.json { render :show, status: :created, location: @fee }
       else
@@ -70,6 +72,6 @@ class FeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fee_params
-      params.require(:fee).permit(:amount, :student_id)
+      params.require(:fee).permit(:amount, :student_id, :month_id, :center_id)
     end
 end

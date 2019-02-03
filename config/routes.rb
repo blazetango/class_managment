@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :months
+  resources :expenses
+  resources :transactions
+  resources :centers
   resources :instruments
   resources :fees
   resources :students
