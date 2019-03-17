@@ -22,20 +22,40 @@ class FeesController < ApplicationController
 
   # GET /fees/1/edit
   def edit
+    @students = Student.all
+    @months = Month.all
+    @centers = Center.all
   end
 
   # POST /fees
   # POST /fees.json
   def create
+    @students = Student.all
+    @months = Month.all
+    @centers = Center.all
     @fee = Fee.new(fee_params)
     respond_to do |format|
-      if @fee.save
-        Transaction.create(transactable: @fee, name: "student fees")
-        format.html { redirect_to @fee, notice: 'Fee was successfully created.' }
-        format.json { render :show, status: :created, location: @fee }
+      status = if @fee.fees_frequency == "quaterly"
+        (@fee.month.id..@fee.month.id+2).each do |month|
+          #next @fee.month_id == month
+          fee_dup = @fee.dup
+          fee_dup.month_id = month
+          fee_dup.amount = @fee.amount / 3
+          fee_dup.save!
+          Transaction.create(transactable: fee_dup, name: "student fees")
+        end
+          #Transaction.create(transactable: @fee, name: "student fees")
+          format.html { redirect_to @fee, notice: 'Fee was successfully created.' }
+          format.json { render :show, status: :created, location: @fee }
       else
-        format.html { render :new }
-        format.json { render json: @fee.errors, status: :unprocessable_entity }
+        if @fee.save
+          Transaction.create(transactable: @fee, name: "student fees")
+          format.html { redirect_to @fee, notice: 'Fee was successfully created.' }
+          format.json { render :show, status: :created, location: @fee }
+        else
+          format.html { render :new }
+          format.json { render json: @fee.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -72,6 +92,6 @@ class FeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fee_params
-      params.require(:fee).permit(:amount, :student_id, :month_id, :center_id)
+      params.require(:fee).permit(:amount, :student_id, :month_id, :fees_frequency, :center_id)
     end
 end

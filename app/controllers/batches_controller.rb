@@ -24,6 +24,7 @@ class BatchesController < ApplicationController
   # GET /batches/1/edit
   def edit
     @instruments = Instrument.all
+    @centers = Center.all
   end
 
   # POST /batches

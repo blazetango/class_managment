@@ -15,6 +15,12 @@
     <%= form.label :amount %>
     <%= form.text_field :amount, id: :fee_amount %>
   </div>
+  
+   <div class="field">
+    <%= form.label :fees_frequency %>
+    <%= form.select :fees_frequency,[['Monthly','monthly'], ['Quaterly','quaterly'], ['semiannually', 'semiannually']], id: :fee_fees_frequency %>
+  </div>
+
 
   <div class="field">
     <%= form.label :month_id %>
