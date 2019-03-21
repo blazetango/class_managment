@@ -10,6 +10,7 @@ class CentersController < ApplicationController
   # GET /centers/1
   # GET /centers/1.json
   def show
+    @months = Month.where('name ILIKE? ',"%#{Date.current.strftime("%Y")}")
   end
 
   # GET /centers/new

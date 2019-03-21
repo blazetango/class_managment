@@ -42,14 +42,14 @@ class FeesController < ApplicationController
           fee_dup.month_id = month
           fee_dup.amount = @fee.amount / 3
           fee_dup.save!
-          Transaction.create(transactable: fee_dup, name: "student fees")
+          Transaction.create(transactable: fee_dup, name: "student fees", month_id: fee_dup.month.id)
         end
           #Transaction.create(transactable: @fee, name: "student fees")
           format.html { redirect_to @fee, notice: 'Fee was successfully created.' }
           format.json { render :show, status: :created, location: @fee }
       else
         if @fee.save
-          Transaction.create(transactable: @fee, name: "student fees")
+          Transaction.create(transactable: @fee, name: "student fees", month_id: @fee.month.id)
           format.html { redirect_to @fee, notice: 'Fee was successfully created.' }
           format.json { render :show, status: :created, location: @fee }
         else

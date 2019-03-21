@@ -17,3 +17,25 @@
 
 <%= link_to 'Edit', edit_center_path(@center) %> |
 <%= link_to 'Back', centers_path %>
+<hr>
+<table>
+  <thead>
+    <tr>
+      <th>month</th>
+      <th>expense</th>
+      <th>income</th>
+      <th> profit/loss</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @months.each do |month| %>
+      <tr>
+        <td><%= month.name %></td>
+        <td><%= a = Transaction.where(month_id: month.id, transactable_type: 'Expense').map{|d| d.transactable.amount}.sum%></td>
+        <td><%= b =  Transaction.where(month_id: month.id, transactable_type: 'Fee').map{|d| d.transactable.amount}.sum %></td>
+       <td><%= b - a %>
+    <% end %>
+  </tbody>
+</table>
