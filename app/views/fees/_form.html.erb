@@ -15,6 +15,10 @@
     <%= form.label :amount %>
     <%= form.text_field :amount, id: :fee_amount %>
   </div>
+   <div class="field">
+    <%= form.label :payment_date %>
+    <%= form.text_field :transaction_date, id: :fee_amount, class: 'datepicker' %>
+  </div>
   
    <div class="field">
     <%= form.label :fees_frequency %>
@@ -34,10 +38,19 @@
 
   <div class="field">
     <%= form.label :student %>
-    <%= form.select :student_id, options_for_select(@students.collect{ |u| [u.name, u.id] }) ,  id: :fees_student_id %>
+    <%= form.select :student_id, options_for_select(@students.collect{ |u| [u.first_name, u.id] }) ,  id: :fees_student_id %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+
+     format : 'dd-mm-yyyy'
+    });
+  });
+</script>

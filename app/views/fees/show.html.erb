@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Transaction date:</strong>
+  <%= @fee.transaction_date.strftime("%d-%m-%y") %>
+</p>
+
+<p>
   <strong>Student:</strong>
   <%= @fee.student.first_name %>
 </p>
