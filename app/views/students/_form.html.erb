@@ -12,8 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :student_name %>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :student_first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :middle_name %>
+    <%= form.text_field :middle_name, id: :student_middle_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :student_last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parent_name %>
+    <%= form.text_field :parent_name, id: :student_parent_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.text_field :date_of_birth, id: :student_date_of_birth, class: 'datepicker'  %>
+  </div>
+
+<div class="field">
+    <%= form.label :date_of_joining %>
+    <%= form.text_field :date_of_joining, id: :student_date_of_joining, class: 'datepicker'  %>
   </div>
 
   <div class="field">
@@ -30,3 +55,13 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+
+     format : 'dd-mm-yyyy'
+    });
+  });
+</script>

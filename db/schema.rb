@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202182350) do
+ActiveRecord::Schema.define(version: 20190404090241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20190202182350) do
     t.bigint "month_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "center_id"
     t.index ["month_id"], name: "index_expenses_on_month_id"
   end
 
@@ -51,6 +52,8 @@ ActiveRecord::Schema.define(version: 20190202182350) do
     t.datetime "updated_at", null: false
     t.bigint "center_id"
     t.bigint "month_id"
+    t.string "fees_frequency"
+    t.date "transaction_date"
     t.index ["center_id"], name: "index_fees_on_center_id"
     t.index ["month_id"], name: "index_fees_on_month_id"
     t.index ["student_id"], name: "index_fees_on_student_id"
@@ -69,11 +72,16 @@ ActiveRecord::Schema.define(version: 20190202182350) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
     t.string "mobile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "batch_id"
+    t.date "date_of_birth"
+    t.string "middle_name"
+    t.string "last_name"
+    t.string "parent_name"
+    t.date "date_of_joining"
     t.index ["batch_id"], name: "index_students_on_batch_id"
   end
 
@@ -83,6 +91,7 @@ ActiveRecord::Schema.define(version: 20190202182350) do
     t.bigint "transactable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "month_id"
     t.index ["transactable_type", "transactable_id"], name: "index_transactions_on_transactable_type_and_transactable_id"
   end
 

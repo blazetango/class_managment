@@ -48,7 +48,7 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
-        <td><%= student.name %></td>
+        <td><%= student.first_name %></td>
         <td><%= student.mobile %></td>
         <td><%= student.batch.name %></td>
         <td><%= link_to 'Show', student %></td>

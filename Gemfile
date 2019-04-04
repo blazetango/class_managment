@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem "bootstrap-sass", ">= 3.4.1"
 
 gem 'bootswatch-rails'
+gem 'bootstrap-datepicker-rails'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
