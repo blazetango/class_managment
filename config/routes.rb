@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :fees
   resources :students
   resources :batches
+  resources :attendences
+   get 'generate_attendence', to: 'attendences#generate_attendence'
+   put 'update_attendance', to: 'attendences#update_attendance'
   devise_for :users
   devise_scope :user do
     get '/sign-in' => "devise/sessions#new", :as => :login

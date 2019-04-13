@@ -27,6 +27,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem "bootstrap-sass", ">= 3.4.1"
+gem "simple_form"
 
 gem 'bootswatch-rails'
 gem 'bootstrap-datepicker-rails'
