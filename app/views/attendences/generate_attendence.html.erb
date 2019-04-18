@@ -6,19 +6,15 @@
   <thead>
     <tr>
       <th>student</th>
-      <th>date</th>
       <th></th>
        <th colspan="3"></th>
       <th>attendence details </th>
     </tr>
   </thead>
-
-  <% #binding.pry%>
   <tbody>
     <% @attendences.each do |attend| %>
       <tr>
         <td><%= attend.student.first_name %></td>
-        <td><%= attend.session_date %></td>
         <td>
           <td></td>
           <td>
@@ -26,9 +22,9 @@
             url: update_attendance_path(id: attend.id),remote: true ,
             html: {class: 'form-inline'},
             method: :put do |f| %>
-
-            <%=    f.input :attend, as: :boolean do f.check_box :attend, {}, "true", "false" end %>
-          </td> 
+            <td><%= f.input :session_date,  input_html: {value: f.object.session_date || ''}%></td>
+            <td><%= f.input :attend, label: 'present', as: :boolean do f.check_box :attend, {}, "true", "false" end %></td>
+          </td>
           <td>
             <%= f.input :remarks %>
           </td>      
@@ -37,8 +33,6 @@
           </td>
           <% end %>
         </td>  
-        </td>
-        
       </tr>
     <% end %>
   </tbody>
