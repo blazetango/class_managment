@@ -33,7 +33,7 @@ def create
   	students = @batch.students
   	@attendences = []
   	students.each do |g|
-     @attendences  << Attendence.create(student_id: g.id, batch_id: @batch.id, attend: true, session_date: Date.current)
+     @attendences  << Attendence.find_or_create_by(student_id: g.id, batch_id: @batch.id, attend: true, session_date: Date.current)
   	end 
   end
 

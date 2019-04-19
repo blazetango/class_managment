@@ -16,21 +16,19 @@
       <tr>
         <td><%= attend.student.first_name %></td>
         <td>
-          <td></td>
           <td>
           <%= simple_form_for attend, 
             url: update_attendance_path(id: attend.id),remote: true ,
             html: {class: 'form-inline'},
             method: :put do |f| %>
-            <td><%= f.input :session_date,  input_html: {value: f.object.session_date || ''}%></td>
-            <td><%= f.input :attend, label: 'present', as: :boolean do f.check_box :attend, {}, "true", "false" end %></td>
-          </td>
-          <td>
-            <%= f.input :remarks %>
-          </td>      
-          <td>        
-            <%= f.submit %>
-          </td>
+              <td><%= f.input :session_date,  input_html: {value: f.object.session_date || ''}%>
+              </td>
+              <td>
+                <%= f.input :attend, label: 'present', as: :boolean do f.check_box :attend, {}, "true", "false" end %></td>
+              </td>
+              <td><%= f.input :remarks %></td>
+              <td> <%= f.submit %>
+              </td>
           <% end %>
         </td>  
       </tr>
