@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Attendence</h1>
+
+<table>
+  <thead>
+    <tr>
+      
+		<th>session_date</th>
+		<th>batch </th>
+		<th>student</th>
+		<th>remarks </th>
+		<th>attend</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attendences.each do |attend| %>
+      <tr>    
+	    <td><%= attend.session_date%> </td>
+	    <td><%= attend.batch.name%> </td>
+	    <td><%= attend.student.first_name %> </td>
+	    <td><%=  attend.remarks %> </td>
+	    <td><%=  attend.attend? ? "present" : 'absent'  %> </td>        
+        <td><%= link_to 'Show', attend %></td>
+        <td><%= link_to 'Edit', edit_attendence_path(attend) %></td>
+        <td><%= link_to 'Destroy', attend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

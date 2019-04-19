@@ -1,5 +1,9 @@
 class AttendencesController < ApplicationController
 
+def index
+  @attendences = Attendence.all
+end
+
 def create
     @attendence = Attendence.new(attendence_params)
 
