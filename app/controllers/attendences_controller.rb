@@ -35,16 +35,24 @@ def create
   def generate_attendence
   	@batch = Batch.find params[:batch_id]
   	students = @batch.students
-  	@attendences = []
-  	students.each do |g|
-     @attendences  << Attendence.find_or_create_by(student_id: g.id, batch_id: @batch.id, attend: true, session_date: Date.current)
+    @attendences = []
+    @attend_id = []
+    students.each do |g|
+      @attendences  << Attendence.find_or_create_by(student_id: g.id, batch_id: @batch.id, attend: true, session_date: Date.current)
   	end 
   end
 
   def update_attendance
-  	@attendence  = Attendence.find params["id"]
-  	@attendence.update(attendence_params)
-  	
+    absent = params["students_current_batch"]  - params['attend']
+    para = {}
+    params['students_current_batch'].each_with_index do |c, v |
+      p c 
+      para['remarks'] = params['remarks'][v]
+      para['session_date'] = params['session_date'][v]
+      para['attend'] = false if absent.include? c.to_s
+      attendence  = Attendence.find c 
+      attendence.update_attributes!(para)
+    end 
   end
 
 

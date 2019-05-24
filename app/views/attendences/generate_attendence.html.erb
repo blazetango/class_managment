@@ -11,30 +11,29 @@
       <th>attendence details </th>
     </tr>
   </thead>
-  <tbody>
+    <%= form_tag ('/update_attendance'), html: {class: 'form-inline'}, remote: true, method: :put   do  %> 
+    <tbody>
     <% @attendences.each do |attend| %>
       <tr>
         <td><%= attend.student.first_name %></td>
         <td>
+            <%= hidden_field_tag 'students_current_batch[]',  attend.id %>
           <td>
-          <%= simple_form_for attend, 
-            url: update_attendance_path(id: attend.id),remote: true ,
-            html: {class: 'form-inline'},
-            method: :put do |f| %>
-              <td><%= f.input :session_date,  input_html: {value: f.object.session_date || ''}%>
+              <td><%= text_field_tag 'session_date[]',  (attend.session_date || '')%>
               </td>
               <td>
-                <%= f.input :attend, label: 'present', as: :boolean do f.check_box :attend, {}, "true", "false" end %></td>
+                <%= check_box_tag 'attend[]', attend.id, attend.attend %></td>
               </td>
-              <td><%= f.input :remarks %></td>
-              <td> <%= f.submit %>
+              <td><%= text_field_tag 'remarks[]' %></td>
               </td>
-          <% end %>
         </td>  
       </tr>
     <% end %>
   </tbody>
 </table>
+   <td> <%= submit_tag 'submit' %>
+   <% end %>
+
 <%= link_to "return to batch", batch_path(@batch)%>
 <br>
 
