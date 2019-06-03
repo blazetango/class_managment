@@ -1,1 +1,15 @@
-PRONTO_GITHUB_ACCESS_TOKEN = 2669398e0df590af82e0f212a2d65f6651d64809
+all:
+  exclude:
+    - 'spec/**/*'
+# exclude files for single runner
+eslint:
+  exclude:
+    - 'app/assets/**/*'
+github:
+  slug: prontolabs/pronto
+  access_token: 
+  api_endpoint: https://api.github.com/
+  web_endpoint: https://github.com/
+max_warnings: 150
+warnings_per_review: 30
+verbose: false
