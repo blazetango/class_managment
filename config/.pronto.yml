@@ -7,7 +7,7 @@ eslint:
     - 'app/assets/**/*'
 github:
   slug: prontolabs/pronto
-  access_token: 
+  access_token: <%= ENV['token'] %>
   api_endpoint: https://api.github.com/
   web_endpoint: https://github.com/
 max_warnings: 150
